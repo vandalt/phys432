@@ -1,2 +1,16 @@
-# Problem Set 4
-My submission for problem set 4.
+# Problem Set 4 - Thomas Vandal
+My submission for problem set 4. I used Python 3.7.6.
+
+**Note: I am submitting the advection-diffusion problem and the hydro solver.** I did the other problem only to familiarize with this topic.
+
+## Advection Solver (Problem Set 4, Section 3)
+The file q3_advection.py solves the advection problem described in section 3 of the problem set. When the file is executed, the left and right panels show the FTCS and the Lax-Friedrich solutions, respectively. The timestep and grid spacing are already set such that the Lax-Friedrich scheme is stable. However, the FTCS scheme is not stable, as we expect from stability analysis.
+
+## Advection-Diffusion Solver (Problem Set 4, Section 4)
+The file q4_advection_diffusion.py solves the advection-diffusion problem described in section 4 of the problem set. This is very similar to the advection solver from last section, with the addition of a diffusion term. The Lax-Friedrich method is used for advection, while the implicit method is used for diffusion. The problem is tested for two diffusion coefficients. We can see that for a greater value of D, the advection (i.e. translation towards the left) will be slower. Moreover, a greater diffusion coefficient will stabilize faster, and with a smaller overall displacement. This makes sense since for a purely diffusive problem, the solution never moves from the IC in this case, while it goes to the very left for the pure advection problem.
+
+
+## 1-D Hydro Solver (Problem Set 4, section 5)
+The file q5_hydro.py solves the conservative form of the hydro equations using the donor cell advection scheme, as required in section 5 of problem set 4. The code is partially adapted from the Heidelberg lectures, which I used to make sure the steps were properly performed to help stability. Also, the way the BC are enforces with the pressure term comes from the explanations in the lectures (the code appeared to be more stable this way for the problem I had set up).
+
+For very small perturbations (amplitude of the order 0.001), the sound wave seems to simply propagate back and forth. For the pertubation currently set in the file, when the wave comes back in the middle, the perturbation appears to be steeper than the original. This is very clear on the second times it comes back in the middle. This thus means that the density is very compressed in a small position range, so we see a shock. The shock as a smaller width than the initial perturbation, but it is still finite. This width is set by some viscosity. However, we did not explicitely include viscosity here. In fact, it probably comes from numerical diffusion, which often occurs when a continuous system is discretized.
